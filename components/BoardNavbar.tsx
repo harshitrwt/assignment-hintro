@@ -28,7 +28,7 @@ export default function BoardNavbar() {
                 <div>
                     <img src="/logo.png" alt="Logo" className="w-10 h-10" />
                 </div>
-                <span onClick={handleHome} className="text-lg font-bold cursor-pointer text-white">
+                <span onClick={handleHome} className="text-2xl font-bold cursor-pointer text-white">
                     Task<span className="text-orange-500">Flow</span>
                 </span>
             </div>

@@ -51,7 +51,7 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
   if (isOverlay) {
     return (
       <div
-        className="rounded-xl p-3 border border-orange-500/40 shadow-2xl"
+        className="rounded-xl p-3 border border-orange-500/40 shadow-2xl "
         style={{
           background: '#1c1c1c',
           borderLeft: '3px solid #f97316',
@@ -61,7 +61,7 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
         }}
       >
         <div className="flex items-start gap-1.5 mb-1.5">
-          <GripVertical className="w-3.5 h-3.5 text-neutral-600 mt-0.5 flex-shrink-0" />
+          <GripVertical className="w-3.5 h-3.5 text-neutral-600 mt-0.5" />
           <p className="text-sm font-medium text-white leading-snug truncate flex-1">
             {task.title}
           </p>
@@ -200,7 +200,7 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
         </div>
 
      
-        <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+        <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
           <button
             onClick={() => setEditing(true)}
             className="p-1 rounded hover:bg-white/10 text-neutral-400 hover:text-orange-500 transition-all cursor-pointer"

@@ -9,7 +9,7 @@ const columnConfig = {
   todo: {
     icon: <Circle className="w-4 h-4" />,
     headerClass: "column-header-todo",
-    emptyText: "No tasks yet — create one from the sidebar!",
+    emptyText: "No tasks yet, create one from the sidebar!",
   },
   doing: {
     icon: <Clock className="w-4 h-4" />,

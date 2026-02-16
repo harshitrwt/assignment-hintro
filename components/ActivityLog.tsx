@@ -15,9 +15,9 @@ const typeConfig = {
   },
   edited: {
     icon: <Pencil className="w-3 h-3" />,
-    color: "text-indigo-400",
-    bg: "bg-indigo-500/15",
-    border: "border-indigo-500/30",
+    color: "text-orange-400",
+    bg: "bg-orange-500/15",
+    border: "border-orange-500/30",
     label: "Edited",
   },
   moved: {

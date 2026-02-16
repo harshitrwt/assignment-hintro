@@ -41,13 +41,13 @@ export default function LoginForm() {
         style={{
           backgroundColor: '#111',
           backgroundImage:
-            "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXOirFxTNu4GOsmD0qfyTqpaxlJxEXSjiD_A&s')",
+            "url('https://i.pinimg.com/1200x/c1/bd/a4/c1bda4431b85a0ff175e0e9105ab273d.jpg')",
         }}
       >
-        <div className="absolute inset-0 bg-black opacity-90"></div>
+        <div className="absolute inset-0 bg-black opacity-85"></div>
         <div className="relative z-10 text-center px-12 max-w-lg">
-          <div className="w-16 h-16 rounded-2xl bg-orange-500 flex items-center justify-center mx-auto mb-8">
-            <Layout className="w-8 h-8 text-white" />
+          <div>
+            <img src="/logo.png" alt="Logo" className="w-12 h-12 mx-auto mb-4" />
           </div>
           <h1 className="text-4xl font-extrabold text-white mb-4">
             Task<span className="text-orange-500">Flow</span>

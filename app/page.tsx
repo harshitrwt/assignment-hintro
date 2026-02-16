@@ -1,65 +1,332 @@
-import Image from "next/image";
+"use client";
+
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
+import { CheckCircle, Zap, Shield, Layout, ArrowRight, Sparkles, BarChart3, Users } from "lucide-react";
+import HomeIcon from "@/components/ui/home-icon";
+import Ribbons from "@/components/Ribbons";
+import DotGrid from "@/components/DotGrid";
 
 export default function Home() {
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+
+  const handleGetStarted = () => {
+    if (isAuthenticated) {
+      router.push("/board");
+    } else {
+      router.push("/login");
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-red-500 dark:text-red-500">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
+
+      <Ribbons />
+      {/* for Navigation */}
+      <nav className="sticky top-0 z-50 " style={{ background: 'rgba(10, 10, 10, 0.95)', backdropFilter: 'blur(12px)' }}>
+        <div className="mx-auto max-w-5xl flex items-center justify-between px-4 sm:px-6 py-4">
+          <div className="flex items-center gap-3">
+            <div>
+              <img src="/logo.png" alt="Logo" className="w-10 h-10" />
+            </div>
+            <span className="text-3xl font-bold tracking-tight text-white">
+              Task<span className="text-orange-500">Flow</span>
+            </span>
+          </div>
+
+
+
+          <div className="flex items-center gap-3">
+            {isAuthenticated ? (
+              <button onClick={() => router.push("/board")}
+                className="rounded-xl bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-orange-600 transition-all cursor-pointer"
+              >
+                Dashboard
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={() => router.push("/login")}
+                  className="rounded-xl px-5 py-2.5 text-sm font-semibold text-neutral-300 hover:text-white transition-colors cursor-pointer"
+                >
+                  Sign In
+                </button>
+                
+              </>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </nav>
+
+      <main className="flex-1">
+
+
+        {/* Hero Section part from here */}
+        <section className="relative overflow-hidden px-4 sm:px-6 pt-16 sm:pt-28 pb-16 text-center">
+          <div className="absolute inset-0 z-0 pointer-events-none">
+            <DotGrid
+              dotSize={5}
+              gap={15}
+              baseColor="bg-neutral-700/20"
+              activeColor="#e0421a"
+              proximity={160}
+              shockRadius={350}
+              shockStrength={5}
+              resistance={750}
+              returnDuration={1.5}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          </div>
+
+          <div className="relative z-10">
+
+          
+            <div className="inline-flex z-20 items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 mb-8">
+              <HomeIcon className="w-4 h-4 text-orange-400" />
+              <span className="text-sm font-medium text-orange-300">
+                Built for productivity enthusiasts
+              </span>
+            </div>
+
+            <h1 className="mx-auto max-w-4xl text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1]">
+              <span className="text-white">Manage tasks</span>
+              <br />
+              <span className="text-orange-500">with zero friction.</span>
+            </h1>
+
+            <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-8 text-neutral-400">
+              TaskFlow is the lightning-fast, client-side task manager designed for focus.
+              Drag, drop, organize, all your Tasks. No download, no excuses.
+            </p>
+
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={handleGetStarted}
+                className="group rounded-xl bg-orange-500 px-8 py-3.5 text-base font-semibold text-white hover:bg-orange-600 transition-all flex items-center gap-2 cursor-pointer"
+              >
+                {isAuthenticated ? "Go to Dashboard" : "Get Started for Free"}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+            </div>
+
+            <div className="mt-16 flex items-center justify-center gap-8 sm:gap-16">
+              {[
+                { value: "100%", label: "Client-Side" },
+                { value: "0ms", label: "Server Latency" },
+                { value: "∞", label: "Tasks Supported" },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-orange-500">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-neutral-500 mt-1">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        
+        <section id="features" className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
+          <div className="text-center mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+              Everything you need to stay productive
+            </h2>
+            <p className="mt-4 text-neutral-400 max-w-xl mx-auto">
+              Powerful features packed into a sleek, modern interface
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: <Layout className="w-6 h-6" />,
+                title: "Kanban Board",
+                desc: "Visual task management with drag-and-drop columns — To Do, Doing, and Done.",
+              },
+              {
+                icon: <Zap className="w-6 h-6" />,
+                title: "Instant Search",
+                desc: "Find any task in milliseconds with real-time search and smart filters.",
+              },
+              {
+                icon: <Shield className="w-6 h-6" />,
+                title: "Protected Access",
+                desc: "Secure login with session persistence. Only authenticated users see the board.",
+              },
+              {
+                icon: <BarChart3 className="w-6 h-6" />,
+                title: "Activity Tracking",
+                desc: "Complete history of task creates, edits, moves, and deletions — all logged.",
+              },
+              {
+                icon: <CheckCircle className="w-6 h-6" />,
+                title: "Persistent Storage",
+                desc: "Browser localStorage keeps your data safe across refreshes. No backend needed.",
+              },
+              {
+                icon: <Users className="w-6 h-6" />,
+                title: "Priority System",
+                desc: "Tag tasks with Low, Medium, or High priority. Filter and sort in one click.",
+              },
+            ].map((feature, i) => (
+              <div
+                key={i}
+                className="group rounded-2xl border border-neutral-800 p-6 transition-all hover:border-orange-500/40"
+                style={{ background: 'var(--bg-secondary)' }}
+              >
+                <div className="w-12 h-12 rounded-xl bg-orange-500/15 flex items-center justify-center mb-4 text-orange-500">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-sm text-neutral-400 leading-relaxed">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+       
+        <section id="workflow" className="px-4 sm:px-6 py-16 sm:py-24" style={{ background: 'var(--bg-secondary)' }}>
+          <div className="mx-auto max-w-5xl">
+            <div className="text-center mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+                How it <span className="text-orange-500">works</span>
+              </h2>
+              <p className="mt-4 text-neutral-400">Three simple steps to organized productivity</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+              {[
+                {
+                  step: "01",
+                  title: "Sign In",
+                  desc: "Log in with hardcoded credentials. Your session persists in localStorage.",
+                },
+                {
+                  step: "02",
+                  title: "Create Tasks",
+                  desc: "Add tasks with title, description, and priority. They appear in the To Do column.",
+                },
+                {
+                  step: "03",
+                  title: "Track Progress",
+                  desc: "Drag tasks between columns, edit, delete, and watch your activity log grow.",
+                },
+              ].map((item, i) => (
+                <div key={i} className="text-center relative">
+                  <div className="text-5xl font-extrabold text-orange-500 mb-4">{item.step}</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-neutral-400 leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        
+        <section id="faq" className="px-4 sm:px-6 py-16 sm:py-24">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="mb-12 text-center text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+              Frequently Asked <span className="text-orange-500">Questions</span>
+            </h2>
+            <div className="space-y-6">
+              {[
+                {
+                  q: "What are the login credentials?",
+                  a: "Email: intern@demo.com | Password: intern123. These are hardcoded since there's no backend.",
+                },
+                {
+                  q: "Does my data persist after refresh?",
+                  a: "Yes! All tasks, session data, and activity logs are stored in your browser's localStorage.",
+                },
+                {
+                  q: "Can I drag tasks between columns?",
+                  a: "Absolutely. Drag any task from To Do → Doing → Done and vice versa. All moves are logged.",
+                },
+                {
+                  q: "Is there a backend?",
+                  a: "No. This is a 100% client-side application built with Next.js. Everything runs in your browser.",
+                },
+              ].map((faq, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl border border-neutral-800 p-6 hover:border-orange-500/30 transition-colors"
+                  style={{ background: 'var(--bg-secondary)' }}
+                >
+                  <h4 className="font-semibold text-lg text-white">{faq.q}</h4>
+                  <p className="mt-2 text-neutral-400 text-sm leading-relaxed">{faq.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+     
+        <section className="px-4 sm:px-6 py-16 sm:py-24">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="rounded-3xl border border-neutral-800 p-8 sm:p-12" style={{ background: 'var(--bg-secondary)' }}>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
+                Ready to get <span className="text-orange-500">organized</span>?
+              </h2>
+              <p className="text-neutral-400 mb-8 max-w-lg mx-auto">
+                Start managing your tasks right now. No sign-up forms, no credit cards, no backend dependencies.
+              </p>
+              <button
+                onClick={handleGetStarted}
+                className="group rounded-xl bg-orange-500 px-10 py-4 text-base font-semibold text-white hover:bg-orange-600 transition-all inline-flex items-center gap-2 cursor-pointer"
+              >
+                {isAuthenticated ? "Open Dashboard" : "Start Now — It's Free"}
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          </div>
+        </section>
       </main>
+
+    
+      <footer className="border-t border-neutral-800 px-4 sm:px-6 py-12 sm:py-16" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 mb-10">
+          
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div>
+                  <img src="/logo.png" alt="Logo" className="w-10 h-10" />
+                </div>
+                <span className="text-3xl font-bold text-white">TaskFlow</span>
+              </div>
+              <p className="text-sm text-neutral-500 leading-relaxed">
+                A lightweight, client-side task management board. Organize your workflow with drag-and-drop Kanban columns.
+              </p>
+            </div>
+
+          
+            <div>
+              <h4 className="text-sm font-semibold text-white mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                <li><a href="#features" className="text-sm text-neutral-500 hover:text-orange-500 transition-colors cursor-pointer">Features</a></li>
+                <li><a href="#workflow" className="text-sm text-neutral-500 hover:text-orange-500 transition-colors cursor-pointer">How it Works</a></li>
+                <li><a href="#faq" className="text-sm text-neutral-500 hover:text-orange-500 transition-colors cursor-pointer">FAQ</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-sm font-semibold text-white mb-4">Built With</h4>
+              <ul className="space-y-2">
+                <li className="text-sm text-neutral-500">Next.js</li>
+                <li className="text-sm text-neutral-500">React &amp; TypeScript</li>
+                <li className="text-sm text-neutral-500">localStorage</li>
+                <li className="text-sm text-neutral-500">dnd-kit</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-neutral-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-neutral-600">
+              © 2026 TaskFlow. All data stored locally in your browser.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

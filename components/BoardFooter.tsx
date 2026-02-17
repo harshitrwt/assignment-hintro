@@ -16,10 +16,6 @@ export default function BoardFooter() {
             <p className="text-sm text-secondary">
                 © 2026 TaskFlow &middot; All rights reserved.
             </p>
-            <div className="flex gap-4 text-sm text-secondary">
-                <a href="#" className="hover:text-orange-500 transition-colors cursor-pointer">GitHub</a>
-                <a href="#" className="hover:text-orange-500 transition-colors cursor-pointer">Privacy</a>
-            </div>
         </footer>
     );
 }

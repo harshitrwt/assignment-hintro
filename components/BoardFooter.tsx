@@ -14,7 +14,7 @@ export default function BoardFooter() {
                 <span className="text-sm font-semibold text-neutral-400">TaskFlow</span>
             </div>
             <p className="text-sm text-neutral-500">
-                © 2026 TaskFlow &middot; Built with Next.js &middot; All data stored locally
+                © 2026 TaskFlow &middot; All rights reserved.
             </p>
             <div className="flex gap-4 text-sm text-neutral-500">
                 <a href="#" className="hover:text-orange-500 transition-colors cursor-pointer">GitHub</a>

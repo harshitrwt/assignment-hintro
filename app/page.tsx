@@ -8,6 +8,26 @@ import Ribbons from "@/components/Ribbons";
 import DotGrid from "@/components/DotGrid";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import Aurora from "@/components/Aurora";
+import { motion, easeInOut } from "framer-motion";
+
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: easeInOut },
+  },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
 
 
 
@@ -84,28 +104,31 @@ export default function Home() {
             />
           </div>
 
-          <div className="relative z-10">
+          <motion.div className="relative z-10"
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible">
 
 
-            <div className="inline-flex z-20 items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 mb-8">
+            <motion.div variants={fadeUp} className="inline-flex z-20 items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 mb-8">
               <HomeIcon className="w-4 h-4 text-orange-400" />
               <span className="text-sm font-medium text-orange-500 dark:text-orange-300">
                 Built for productivity enthusiasts
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className="mx-auto max-w-4xl text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1]">
+            <motion.h1 variants={fadeUp} className="mx-auto max-w-4xl text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1]">
               <span className="text-primary">Manage tasks</span>
               <br />
               <span className="text-orange-500">with zero friction.</span>
-            </h1>
+            </motion.h1>
 
-            <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-8 text-secondary">
+            <motion.p variants={fadeUp} className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-8 text-secondary">
               TaskFlow is the lightning-fast, client-side task manager designed for focus.
               Drag, drop, organize, all your Tasks. No download, no excuses.
-            </p>
+            </motion.p>
 
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <motion.div variants={fadeUp} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={handleGetStarted}
                 className="group rounded-xl bg-orange-500 px-8 py-3.5 text-base font-semibold text-white hover:bg-orange-600 transition-all flex items-center gap-2 cursor-pointer"
@@ -114,9 +137,9 @@ export default function Home() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
 
-            </div>
+            </motion.div>
 
-            <div className="mt-16 flex items-center justify-center gap-8 sm:gap-16">
+            <motion.div variants={fadeUp}  className="mt-16 flex items-center justify-center gap-8 sm:gap-16">
               {[
                 { value: "100%", label: "Client-Side" },
                 { value: "0ms", label: "Server Latency" },
@@ -127,22 +150,22 @@ export default function Home() {
                   <div className="text-xs sm:text-sm text-secondary mt-1">{stat.label}</div>
                 </div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </section>
 
 
         <section id="features" className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
           <div className="text-center mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">
+            <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">
               Everything you need to stay productive
-            </h2>
-            <p className="mt-4 text-secondary max-w-xl mx-auto">
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mt-4 text-secondary max-w-xl mx-auto">
               Powerful features packed into a sleek, modern interface
-            </p>
+            </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
                 icon: <Layout className="w-6 h-6" />,
@@ -187,7 +210,7 @@ export default function Home() {
                 <p className="text-sm text-secondary leading-relaxed">{feature.desc}</p>
               </div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
 
@@ -203,14 +226,14 @@ export default function Home() {
 
           <div className="mx-auto max-w-5xl">
 
-            <div className="z-10 text-center mb-16">
+            <motion.div variants={fadeUp} className="z-10 text-center mb-16">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">
                 How it <span className="text-orange-500">works</span>
               </h2>
               <p className="mt-4 text-secondary">Three simple steps to organized productivity</p>
-            </div>
+            </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {[
                 {
                   step: "01",
@@ -234,7 +257,7 @@ export default function Home() {
                   <p className="text-sm text-secondary leading-relaxed">{item.desc}</p>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
@@ -242,25 +265,25 @@ export default function Home() {
 
 
 
-        <section className="px-4 sm:px-6 py-16 sm:py-24">
+        <motion.section variants={fadeUp} className="px-4 sm:px-6 py-16 sm:py-24">
           <div className="mx-auto max-w-4xl text-center">
             <div className="rounded-3xl border border-neutral-200 dark:border-neutral-800 p-8 sm:p-12" style={{ background: 'var(--bg-secondary)' }}>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
+              <motion.h2 variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
                 Ready to get <span className="text-orange-500">organized</span>?
-              </h2>
-              <p className="text-secondary mb-8 max-w-lg mx-auto">
+              </motion.h2>
+              <motion.p variants={fadeUp} className="text-secondary mb-8 max-w-lg mx-auto">
                 Start managing your tasks right now. No sign-up forms, no credit cards, no backend dependencies.
-              </p>
-              <button
+              </motion.p>
+              <motion.button variants={fadeUp}
                 onClick={handleGetStarted}
                 className="group rounded-xl bg-orange-500 px-10 py-4 text-base font-semibold text-white hover:bg-orange-600 transition-all inline-flex items-center gap-2 cursor-pointer"
               >
                 {isAuthenticated ? "Open Dashboard" : "Start Now — It's Free"}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              </motion.button>
             </div>
           </div>
-        </section>
+        </motion.section>
       </main>
 
 

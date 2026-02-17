@@ -64,7 +64,7 @@ export default function TaskForm() {
             <span className="text-xs font-semibold">Reset entire board?</span>
           </div>
 
-          <p className="text-[10px] text-zinc-400">
+          <p className="text-[10px] text-secondary">
             This will permanently remove all tasks from all columns.
           </p>
 
@@ -78,7 +78,7 @@ export default function TaskForm() {
 
             <button
               onClick={() => setShowResetConfirm(false)}
-              className="flex-1 py-1.5 rounded-lg bg-zinc-700/30 border border-zinc-600 text-zinc-400 text-xs font-medium hover:bg-zinc-600/30 transition-all cursor-pointer"
+              className="flex-1 py-1.5 rounded-lg bg-neutral-100 dark:bg-zinc-700/30 border border-neutral-200 dark:border-zinc-600 text-secondary text-xs font-medium hover:bg-neutral-200 dark:hover:bg-zinc-600/30 transition-all cursor-pointer"
             >
               Cancel
             </button>
@@ -136,11 +136,11 @@ export default function TaskForm() {
                   onClick={() => setPriority(p)}
                   className={`flex-1 py-2 rounded-lg text-xs font-semibold capitalize transition-all cursor-pointer border ${priority === p
                     ? p === "low"
-                      ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-400"
+                      ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
                       : p === "medium"
-                        ? "border-amber-500/50 bg-amber-500/20 text-amber-400"
-                        : "border-rose-500/50 bg-rose-500/20 text-rose-400"
-                    : "border-zinc-700 bg-zinc-800/50 text-zinc-400 hover:border-zinc-600"
+                        ? "border-amber-500/50 bg-amber-500/20 text-amber-600 dark:text-amber-400"
+                        : "border-rose-500/50 bg-rose-500/20 text-rose-600 dark:text-rose-400"
+                    : "border-neutral-200 dark:border-zinc-700 bg-neutral-100 dark:bg-zinc-800/50 text-secondary hover:border-neutral-300 dark:hover:border-zinc-600"
                     }`}
                 >
                   {p}
@@ -152,13 +152,13 @@ export default function TaskForm() {
           <button
             type="submit"
             disabled={!title.trim()}
-            className="w-full h-10 rounded-lg bg-orange-500 text-white text-sm font-semibold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all hover:scale-[1.02] disabled:opacity-40 disabled:hover:scale-100 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full h-10 rounded-lg bg-orange-500 text-black dark:text-white text-sm font-semibold shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-all hover:scale-[1.02] disabled:opacity-40 disabled:hover:scale-100 flex items-center justify-center gap-2 cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Add Task
           </button>
 
-          <div className="border-t border-zinc-700 pt-5 space-y-4">
+          <div className="border-t border-neutral-200 dark:border-zinc-700 pt-5 space-y-4">
             <FilterSort />
           </div>
         </div>
@@ -181,7 +181,7 @@ function FilterSort() {
               onClick={() => dispatch({ type: "SET_FILTER", payload: f })}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize transition-all cursor-pointer border ${state.filter === f
                 ? "border-orange-500/50 bg-orange-500/20 text-orange-300"
-                : "border-zinc-700 bg-zinc-800/50 text-zinc-400 hover:border-zinc-600"
+                : "border-neutral-200 dark:border-zinc-700 bg-neutral-100 dark:bg-zinc-800/50 text-secondary hover:border-neutral-300 dark:hover:border-zinc-600"
                 }`}
             >
               {f}
@@ -196,7 +196,7 @@ function FilterSort() {
         <select
           value={state.sort}
           onChange={(e) => dispatch({ type: "SET_SORT", payload: e.target.value as any })}
-          className="w-full h-9 px-3 rounded-lg border border-zinc-700 text-sm text-primary focus:outline-none focus:border-indigo-500 cursor-pointer"
+          className="w-full h-9 px-3 rounded-lg border border-neutral-200 dark:border-zinc-700 text-sm text-primary focus:outline-none focus:border-indigo-500 cursor-pointer"
           style={{ background: 'var(--bg-card)' }}
         >
           <option value="newest">Newest First</option>

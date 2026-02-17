@@ -8,28 +8,28 @@ import { useState } from "react";
 const typeConfig = {
   created: {
     icon: <Plus className="w-3 h-3" />,
-    color: "text-emerald-400",
+    color: "text-emerald-600 dark:text-emerald-400",
     bg: "bg-emerald-500/15",
     border: "border-emerald-500/30",
     label: "Created",
   },
   edited: {
     icon: <Pencil className="w-3 h-3" />,
-    color: "text-orange-400",
+    color: "text-orange-600 dark:text-orange-400",
     bg: "bg-orange-500/15",
     border: "border-orange-500/30",
     label: "Edited",
   },
   moved: {
     icon: <ArrowRightLeft className="w-3 h-3" />,
-    color: "text-amber-400",
+    color: "text-amber-600 dark:text-amber-400",
     bg: "bg-amber-500/15",
     border: "border-amber-500/30",
     label: "Moved",
   },
   deleted: {
     icon: <Trash className="w-3 h-3" />,
-    color: "text-rose-400",
+    color: "text-rose-600 dark:text-rose-400",
     bg: "bg-rose-500/15",
     border: "border-rose-500/30",
     label: "Deleted",
@@ -62,19 +62,19 @@ export default function ActivityLog() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between p-4 border-b border-zinc-800/50 cursor-pointer md:cursor-default" onClick={() => setIsOpen(!isOpen)}>
+      <div className="flex items-center justify-between p-4 border-b border-neutral-200 dark:border-zinc-800/50 cursor-pointer md:cursor-default" onClick={() => setIsOpen(!isOpen)}>
         <div className="flex items-center gap-2">
           <History className="w-4 h-4 text-indigo-400" />
-          <h3 className="text-sm font-bold text-white">Activity Log</h3>
+          <h3 className="text-sm font-bold text-primary">Activity Log</h3>
           {state.activity.length > 0 && (
-            <span className="text-[10px] font-bold text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded-full">
+            <span className="text-[10px] font-bold text-secondary bg-neutral-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded-full">
               {state.activity.length}
             </span>
           )}
         </div>
         <div className="flex items-center gap-2">
           {/* Mobile Toggle Icon */}
-          <div className="md:hidden text-zinc-500">
+          <div className="md:hidden text-secondary">
             {isOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}
           </div>
 
@@ -84,7 +84,7 @@ export default function ActivityLog() {
                 e.stopPropagation();
                 setShowClearConfirm(true);
               }}
-              className="p-1.5 rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/10 transition-all cursor-pointer hidden md:block" // Hide clear button on mobile header to avoid clutter or keep it? User said "slider", maybe keep it.
+              className="p-1.5 rounded-lg text-secondary hover:text-rose-400 hover:bg-rose-500/10 transition-all cursor-pointer hidden md:block" // Hide clear button on mobile header to avoid clutter or keep it? User said "slider", maybe keep it.
             >
               <Trash2 className="w-3.5 h-3.5" />
             </button>
@@ -98,7 +98,7 @@ export default function ActivityLog() {
             <AlertTriangle className="w-4 h-4" />
             <span className="text-xs font-semibold">Clear all activity?</span>
           </div>
-          <p className="text-[10px] text-zinc-400">This will permanently remove all activity history.</p>
+          <p className="text-[10px] text-secondary">This will permanently remove all activity history.</p>
           <div className="flex gap-2">
             <button
               onClick={handleClear}
@@ -108,7 +108,7 @@ export default function ActivityLog() {
             </button>
             <button
               onClick={() => setShowClearConfirm(false)}
-              className="flex-1 py-1.5 rounded-lg bg-zinc-700/30 border border-zinc-600 text-zinc-400 text-xs font-medium hover:bg-zinc-600/30 transition-all cursor-pointer"
+              className="flex-1 py-1.5 rounded-lg bg-neutral-200 dark:bg-zinc-700/30 border border-neutral-300 dark:border-zinc-600 text-secondary text-xs font-medium hover:bg-neutral-300 dark:hover:bg-zinc-600/30 transition-all cursor-pointer"
             >
               Cancel
             </button>
@@ -118,10 +118,10 @@ export default function ActivityLog() {
 
       <div className={`flex-1 overflow-y-auto p-3 space-y-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
         {state.activity.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-16 text-zinc-600">
+          <div className="flex flex-col items-center justify-center py-16 text-secondary">
             <History className="w-8 h-8 mb-3 opacity-30" />
             <p className="text-xs">No activity yet</p>
-            <p className="text-[10px] text-zinc-700 mt-1">Actions will appear here</p>
+            <p className="text-[10px] text-secondary mt-1">Actions will appear here</p>
           </div>
         ) : (
           state.activity.map((a: ActivityEvent) => {
@@ -141,10 +141,10 @@ export default function ActivityLog() {
                         {config.label}
                       </span>
                     </div>
-                    <p className="text-xs text-zinc-300 leading-relaxed">
+                    <p className="text-xs text-primary leading-relaxed">
                       {a.description}
                     </p>
-                    <p className="text-[10px] text-zinc-500 mt-1">
+                    <p className="text-[10px] text-secondary mt-1">
                       {formatTimeAgo(a.timestamp)}
                     </p>
                   </div>

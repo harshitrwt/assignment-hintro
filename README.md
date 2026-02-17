@@ -108,7 +108,6 @@ Key files to inspect:
 
 ## Screenshots
 
-> Dummy screenshot placeholders — replace these with real images in `public/screenshots/`
 
 - Dashboard / Board
 

@@ -5,10 +5,12 @@ import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { Layout, Mail, Lock, ArrowRight, Eye, EyeOff } from "lucide-react";
 import DotGrid from "./DotGrid";
+import { useTheme } from "@/context/ThemeContext";
 
 export default function LoginForm() {
   const { login } = useAuth();
   const router = useRouter();
+  const { theme } = useTheme();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,6 +18,8 @@ export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const dotColor = theme === "dark" ? "#111111" : "#e5e5e5";
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,7 +83,7 @@ export default function LoginForm() {
           <DotGrid
             dotSize={3}
             gap={15}
-            baseColor="#111111"
+            baseColor={dotColor}
             activeColor="#e0421a"
             proximity={120}
             shockRadius={250}
@@ -96,21 +100,21 @@ export default function LoginForm() {
             <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
               <Layout className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-white">
+            <span className="text-xl font-bold text-primary">
               Task<span className="text-orange-500">Flow</span>
             </span>
           </div>
 
           <div className="space-y-2 mb-8">
-            <h2 className="text-3xl font-bold text-white">Welcome back</h2>
-            <p className="text-neutral-400">
+            <h2 className="text-3xl font-bold text-primary">Welcome back</h2>
+            <p className="text-secondary">
               Sign in to continue managing your tasks
             </p>
           </div>
 
           <form onSubmit={submit} className="space-y-5">
             <div className="space-y-2">
-              <label className="text-sm font-medium text-neutral-300">
+              <label className="text-sm font-medium text-secondary">
                 Email Address
               </label>
               <div className="relative">
@@ -118,7 +122,7 @@ export default function LoginForm() {
                 <input
                   type="email"
                   placeholder="intern@demo.com"
-                  className="w-full h-12 pl-10 pr-4 rounded-xl border border-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
+                  className="w-full h-12 pl-10 pr-4 rounded-xl border border-neutral-200 dark:border-neutral-700 text-primary placeholder-neutral-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
                   style={{ background: 'var(--bg-secondary)' }}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -128,7 +132,7 @@ export default function LoginForm() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium text-neutral-300">
+              <label className="text-sm font-medium text-secondary">
                 Password
               </label>
               <div className="relative">
@@ -136,7 +140,7 @@ export default function LoginForm() {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="intern123"
-                  className="w-full h-12 pl-10 pr-12 rounded-xl border border-neutral-700 text-white placeholder-neutral-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
+                  className="w-full h-12 pl-10 pr-12 rounded-xl border border-neutral-200 dark:border-neutral-700 text-primary placeholder-neutral-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-colors"
                   style={{ background: 'var(--bg-secondary)' }}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -160,20 +164,20 @@ export default function LoginForm() {
                 id="rememberMe"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-4 h-4 rounded border-neutral-700 bg-neutral-800 text-orange-500 focus:ring-orange-500 focus:ring-offset-0 cursor-pointer"
+                className="w-4 h-4 rounded border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 text-orange-500 focus:ring-orange-500 focus:ring-offset-0 cursor-pointer"
               />
-              <label htmlFor="rememberMe" className="text-sm text-neutral-400 cursor-pointer select-none">
+              <label htmlFor="rememberMe" className="text-sm text-secondary cursor-pointer select-none">
                 Remember me
               </label>
             </div>
 
             {error && (
-              <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+              <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-500 dark:text-red-400">
                 {error}
               </div>
             )}
 
-            <div className="z-50 rounded-xl border border-orange-500/20 bg-orange-500/5 px-4 py-3 text-xs text-orange-300">
+            <div className="z-50 rounded-xl border border-orange-500/20 bg-orange-500/5 px-4 py-3 text-xs text-orange-600 dark:text-orange-300">
               <strong>Demo Credentials:</strong> intern@demo.com / intern123
             </div>
 
@@ -197,13 +201,13 @@ export default function LoginForm() {
             <button
               type="button"
               onClick={() => router.push("/")}
-              className="text-sm text-neutral-500 hover:text-orange-500 transition-colors cursor-pointer"
+              className="text-sm text-secondary hover:text-orange-500 transition-colors cursor-pointer"
             >
               ← Back to Home
             </button>
           </div>
         </div>
-      </div >
+      </div>
     </div >
   );
 }

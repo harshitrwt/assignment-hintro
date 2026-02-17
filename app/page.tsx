@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { useTheme } from "@/context/ThemeContext";
 import { CheckCircle, Zap, Shield, Layout, ArrowRight, Sparkles, BarChart3, Users } from "lucide-react";
 import HomeIcon from "@/components/ui/home-icon";
 import Ribbons from "@/components/Ribbons";
@@ -31,9 +32,11 @@ const staggerContainer = {
 
 
 
+
 export default function Home() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
+  const { theme } = useTheme();
 
   const handleGetStarted = () => {
     if (isAuthenticated) {
@@ -42,6 +45,8 @@ export default function Home() {
       router.push("/login");
     }
   };
+
+  const dotColor = theme === "dark" ? "#111111" : "#e5e5e5";
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--bg-primary)' }}>
@@ -94,7 +99,7 @@ export default function Home() {
             <DotGrid
               dotSize={5}
               gap={15}
-              baseColor="#111111"
+              baseColor={dotColor}
               activeColor="#e0421a"
               proximity={160}
               shockRadius={300}
@@ -139,7 +144,7 @@ export default function Home() {
 
             </motion.div>
 
-            <motion.div variants={fadeUp}  className="mt-16 flex items-center justify-center gap-8 sm:gap-16">
+            <motion.div variants={fadeUp} className="mt-16 flex items-center justify-center gap-8 sm:gap-16">
               {[
                 { value: "100%", label: "Client-Side" },
                 { value: "0ms", label: "Server Latency" },

@@ -53,7 +53,7 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
       <div
         className="rounded-xl p-3 border border-orange-500/40 shadow-2xl "
         style={{
-          background: '#1c1c1c',
+          background: 'var(--bg-card)',
           borderLeft: '3px solid #f97316',
           opacity: 0.95,
           transform: 'rotate(2deg)',
@@ -61,13 +61,13 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
         }}
       >
         <div className="flex items-start gap-1.5 mb-1.5">
-          <GripVertical className="w-3.5 h-3.5 text-neutral-600 mt-0.5" />
-          <p className="text-sm font-medium text-white leading-snug truncate flex-1">
+          <GripVertical className="w-3.5 h-3.5 text-secondary mt-0.5" />
+          <p className="text-sm font-medium text-primary leading-snug truncate flex-1">
             {task.title}
           </p>
         </div>
         {task.description && (
-          <p className="text-[11px] text-neutral-400 leading-relaxed mb-2 line-clamp-2 pl-5">
+          <p className="text-[11px] text-secondary leading-relaxed mb-2 line-clamp-2 pl-5">
             {task.description}
           </p>
         )}
@@ -75,7 +75,7 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
           <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full capitalize priority-${task.priority}`}>
             {task.priority}
           </span>
-          <div className="flex items-center gap-1 text-[10px] text-neutral-500">
+          <div className="flex items-center gap-1 text-[10px] text-secondary">
             <Clock className="w-2.5 h-2.5" />
             {formatTime(task.createdAt)}
           </div>
@@ -86,18 +86,18 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
 
   if (editing) {
     return (
-      <div className="rounded-xl p-3 space-y-2 border border-orange-500/30" style={{ background: '#1c1c1c' }}>
+      <div className="rounded-xl p-3 space-y-2 border border-orange-500/30" style={{ background: 'var(--bg-card)' }}>
         <input
-          className="w-full px-2 py-1.5 rounded-lg border border-neutral-600 text-sm text-white focus:outline-none focus:border-orange-500"
-          style={{ background: 'rgba(0,0,0,0.3)' }}
+          className="w-full px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-600 text-sm text-primary focus:outline-none focus:border-orange-500"
+          style={{ background: 'var(--bg-hover)' }}
           value={editTitle}
           onChange={(e) => setEditTitle(e.target.value)}
           placeholder="Task title"
           autoFocus
         />
         <textarea
-          className="w-full px-2 py-1.5 rounded-lg border border-neutral-600 text-xs text-white focus:outline-none focus:border-orange-500 resize-none"
-          style={{ background: 'rgba(0,0,0,0.3)' }}
+          className="w-full px-2 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-600 text-xs text-primary focus:outline-none focus:border-orange-500 resize-none"
+          style={{ background: 'var(--bg-hover)' }}
           value={editDesc}
           onChange={(e) => setEditDesc(e.target.value)}
           placeholder="Description (optional)"
@@ -111,11 +111,11 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
               onClick={() => setEditPriority(p)}
               className={`flex-1 py-1 rounded text-[10px] font-semibold capitalize transition-all cursor-pointer border ${editPriority === p
                 ? p === "low"
-                  ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-400"
+                  ? "border-emerald-500/50 bg-emerald-500/20 text-emerald-600 dark:text-emerald-400"
                   : p === "medium"
-                    ? "border-amber-500/50 bg-amber-500/20 text-amber-400"
-                    : "border-rose-500/50 bg-rose-500/20 text-rose-400"
-                : "border-neutral-700 text-neutral-500"
+                    ? "border-amber-500/50 bg-amber-500/20 text-amber-600 dark:text-amber-400"
+                    : "border-rose-500/50 bg-rose-500/20 text-rose-600 dark:text-rose-400"
+                : "border-neutral-200 dark:border-neutral-700 text-secondary"
                 }`}
             >
               {p}
@@ -136,7 +136,7 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
               setEditDesc(task.description || "");
               setEditPriority(task.priority);
             }}
-            className="flex-1 py-1.5 rounded-lg bg-neutral-700/30 border border-neutral-600 text-neutral-400 text-xs font-medium hover:bg-neutral-600/30 transition-all cursor-pointer"
+            className="flex-1 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-700/30 border border-neutral-200 dark:border-neutral-600 text-secondary text-xs font-medium hover:bg-neutral-200 dark:hover:bg-neutral-600/30 transition-all cursor-pointer"
           >
             Cancel
           </button>
@@ -147,9 +147,9 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
 
   if (showDeleteConfirm) {
     return (
-      <div className="rounded-xl p-3 space-y-2 border border-rose-500/30" style={{ background: '#1c1c1c' }}>
-        <p className="text-xs text-neutral-300 font-medium">Delete &quot;{task.title}&quot;?</p>
-        <p className="text-[10px] text-neutral-500">This action cannot be undone.</p>
+      <div className="rounded-xl p-3 space-y-2 border border-rose-500/30" style={{ background: 'var(--bg-card)' }}>
+        <p className="text-xs text-primary font-medium">Delete &quot;{task.title}&quot;?</p>
+        <p className="text-[10px] text-secondary">This action cannot be undone.</p>
         <div className="flex gap-2">
           <button
             onClick={handleDelete}
@@ -159,7 +159,7 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
           </button>
           <button
             onClick={() => setShowDeleteConfirm(false)}
-            className="flex-1 py-1.5 rounded-lg bg-neutral-700/30 border border-neutral-600 text-neutral-400 text-xs font-medium hover:bg-neutral-600/30 transition-all cursor-pointer"
+            className="flex-1 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-700/30 border border-neutral-200 dark:border-neutral-600 text-secondary text-xs font-medium hover:bg-neutral-200 dark:hover:bg-neutral-600/30 transition-all cursor-pointer"
           >
             Cancel
           </button>
@@ -180,37 +180,37 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
       }}
       className="task-card-todo rounded-xl p-3 transition-shadow hover:shadow-lg group"
     >
-      
+
       <div className="flex items-start justify-between gap-2 mb-1.5">
         <div className="flex items-start gap-1.5 flex-1 min-w-0">
-        
+
           <div
             {...listeners}
             {...attributes}
-            className="mt-0.5 cursor-grab active:cursor-grabbing text-neutral-600 hover:text-neutral-400 transition-colors flex-shrink-0"
+            className="mt-0.5 cursor-grab active:cursor-grabbing text-secondary hover:text-primary transition-colors flex-shrink-0"
           >
             <GripVertical className="w-3.5 h-3.5" />
           </div>
 
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-white leading-snug truncate">
+            <p className="text-sm font-medium text-primary leading-snug truncate">
               {task.title}
             </p>
           </div>
         </div>
 
-     
+
         <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
           <button
             onClick={() => setEditing(true)}
-            className="p-1 rounded hover:bg-white/10 text-neutral-400 hover:text-orange-500 transition-all cursor-pointer"
+            className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-white/10 text-secondary hover:text-orange-500 transition-all cursor-pointer"
             title="Edit task"
           >
             <Pencil className="w-3 h-3" />
           </button>
           <button
             onClick={() => setShowDeleteConfirm(true)}
-            className="p-1 rounded hover:bg-white/10 text-neutral-400 hover:text-rose-400 transition-all cursor-pointer"
+            className="p-1 rounded hover:bg-neutral-100 dark:hover:bg-white/10 text-secondary hover:text-rose-400 transition-all cursor-pointer"
             title="Delete task"
           >
             <Trash2 className="w-3 h-3" />
@@ -220,17 +220,17 @@ export default function TaskCard({ task, isOverlay }: { task: Task; isOverlay?: 
 
       {/* Description */}
       {task.description && (
-        <p className="text-[11px] text-neutral-400 leading-relaxed mb-2 line-clamp-2 pl-5">
+        <p className="text-[11px] text-secondary leading-relaxed mb-2 line-clamp-2 pl-5">
           {task.description}
         </p>
       )}
 
-     
+
       <div className="flex items-center justify-between pl-5">
         <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full capitalize priority-${task.priority}`}>
           {task.priority}
         </span>
-        <div className="flex items-center gap-1 text-[10px] text-neutral-500">
+        <div className="flex items-center gap-1 text-[10px] text-secondary">
           <Clock className="w-2.5 h-2.5" />
           {formatTime(task.createdAt)}
         </div>

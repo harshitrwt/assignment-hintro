@@ -124,19 +124,5 @@ Key files to inspect:
 
 ---
 
-## Tips & extension ideas
 
-- Add backend API + database for multi-user persistence
-- Add real authentication (OAuth / JWT)
-- Implement real-time collaboration with WebSockets / Pusher
-- Add drag-handle accessibility improvements and keyboard DnD support
-
----
-
-## Contributing
-
-- Fork, create a feature branch, add tests if applicable, open a PR.
-- Keep components small and prefer composition over prop drilling.
-
----
 

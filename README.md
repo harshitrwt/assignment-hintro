@@ -27,10 +27,10 @@ A lightweight Kanban-style task manager built with **Next.js + TypeScript**. Tas
 
 - `app/`: Next.js App Router pages (`/`, `/board`, `/login`)
 - `components/`: UI components and feature pieces (`TaskBoard`, `TaskCard`, `TaskForm`, `Column`, etc.)
-- `components/ui/`: small design-system primitives (buttons, inputs, cards)
+
 - `context/`: `AppContext` (global reducer + provider)
 - `hooks/`: reusable hooks (`useAuth`, `useLocalStorage`)
-- `lib/`: helpers and `storage` wrapper around `localStorage`/`sessionStorage`
+- `lib/`: helpers and `storage` wrapper around `localStorage`
 - `public/`: static assets (images, icons, screenshots)
 - `types.ts`: TypeScript types and shared interfaces
 
@@ -52,17 +52,23 @@ Key files to inspect:
 
 ---
 
-## How it works
+## How it works - Explanation
 
 1. Global state is managed in `AppContext` using `useReducer` (actions: add/edit/move/delete task).
-2. Drag-and-drop is implemented with `@dnd-kit` in `TaskBoard` and `Column` components — on drop we dispatch `MOVE_TASK`.
+2. Drag-and-drop is implemented with `@dnd-kit` in `TaskBoard` and `Column` components, on drop we dispatch `MOVE_TASK`.
 3. Persistence: app state is saved to `localStorage` by `AppContext` (or `sessionStorage` when "remember me" is disabled).
 4. Auth is mocked in `useAuth`.
 5. UI: composed from small reusable primitives in `components/ui`, styled with Tailwind and animated via `framer-motion`/`gsap`.
 
 ---
 
-## Run locally
+## Setup Steps
+
+1. Clone the Repo 
+   ```bash
+      git clone https://github.com/harshitrwt/assignment-hintro.git
+      cd hintro-assignment
+   ```
 
 1. Install dependencies
 

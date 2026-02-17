@@ -6,6 +6,10 @@ import { CheckCircle, Zap, Shield, Layout, ArrowRight, Sparkles, BarChart3, User
 import HomeIcon from "@/components/ui/home-icon";
 import Ribbons from "@/components/Ribbons";
 import DotGrid from "@/components/DotGrid";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
+import Aurora from "@/components/Aurora";
+
+
 
 export default function Home() {
   const { isAuthenticated } = useAuth();
@@ -24,13 +28,13 @@ export default function Home() {
 
       <Ribbons />
       {/* for Navigation */}
-      <nav className="sticky top-0 z-50 " style={{ background: 'rgba(10, 10, 10, 0.95)', backdropFilter: 'blur(12px)' }}>
+      <nav className="sticky top-0 z-50 border-b border-transparent dark:border-white/5" style={{ background: 'var(--bg-primary)', backdropFilter: 'blur(12px)' }}>
         <div className="mx-auto max-w-5xl flex items-center justify-between px-4 sm:px-6 py-4">
           <div className="flex items-center gap-3">
             <div>
               <img src="/logo.png" alt="Logo" className="w-10 h-10" />
             </div>
-            <span className="text-3xl font-bold tracking-tight text-white">
+            <span className="text-3xl font-bold tracking-tight text-primary">
               Task<span className="text-orange-500">Flow</span>
             </span>
           </div>
@@ -42,20 +46,22 @@ export default function Home() {
               <button onClick={() => router.push("/board")}
                 className="rounded-xl bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-orange-600 transition-all cursor-pointer"
               >
-                Dashboard
+                Board
               </button>
             ) : (
               <>
                 <button
                   onClick={() => router.push("/login")}
-                  className="rounded-xl px-5 py-2.5 text-sm font-semibold text-neutral-300 hover:text-white transition-colors cursor-pointer"
+                  className="rounded-xl px-5 py-2.5 text-sm font-semibold text-secondary hover:text-primary transition-colors cursor-pointer"
                 >
                   Sign In
                 </button>
-                
+
               </>
             )}
+            <AnimatedThemeToggler />
           </div>
+
         </div>
       </nav>
 
@@ -68,10 +74,10 @@ export default function Home() {
             <DotGrid
               dotSize={5}
               gap={15}
-              baseColor="bg-neutral-700/20"
+              baseColor="#111111"
               activeColor="#e0421a"
               proximity={160}
-              shockRadius={350}
+              shockRadius={300}
               shockStrength={5}
               resistance={750}
               returnDuration={1.5}
@@ -80,21 +86,21 @@ export default function Home() {
 
           <div className="relative z-10">
 
-          
+
             <div className="inline-flex z-20 items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 mb-8">
               <HomeIcon className="w-4 h-4 text-orange-400" />
-              <span className="text-sm font-medium text-orange-300">
+              <span className="text-sm font-medium text-orange-500 dark:text-orange-300">
                 Built for productivity enthusiasts
               </span>
             </div>
 
             <h1 className="mx-auto max-w-4xl text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1]">
-              <span className="text-white">Manage tasks</span>
+              <span className="text-primary">Manage tasks</span>
               <br />
               <span className="text-orange-500">with zero friction.</span>
             </h1>
 
-            <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-8 text-neutral-400">
+            <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-8 text-secondary">
               TaskFlow is the lightning-fast, client-side task manager designed for focus.
               Drag, drop, organize, all your Tasks. No download, no excuses.
             </p>
@@ -118,20 +124,20 @@ export default function Home() {
               ].map((stat, i) => (
                 <div key={i} className="text-center">
                   <div className="text-2xl sm:text-3xl font-bold text-orange-500">{stat.value}</div>
-                  <div className="text-xs sm:text-sm text-neutral-500 mt-1">{stat.label}</div>
+                  <div className="text-xs sm:text-sm text-secondary mt-1">{stat.label}</div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        
+
         <section id="features" className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
           <div className="text-center mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">
               Everything you need to stay productive
             </h2>
-            <p className="mt-4 text-neutral-400 max-w-xl mx-auto">
+            <p className="mt-4 text-secondary max-w-xl mx-auto">
               Powerful features packed into a sleek, modern interface
             </p>
           </div>
@@ -171,27 +177,37 @@ export default function Home() {
             ].map((feature, i) => (
               <div
                 key={i}
-                className="group rounded-2xl border border-neutral-800 p-6 transition-all hover:border-orange-500/40"
+                className="group rounded-2xl border border-neutral-200 dark:border-neutral-800 p-6 transition-all hover:border-orange-500/40  cursor-pointer shadow-sm shadow-orange-400"
                 style={{ background: 'var(--bg-secondary)' }}
               >
                 <div className="w-12 h-12 rounded-xl bg-orange-500/15 flex items-center justify-center mb-4 text-orange-500">
                   {feature.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-neutral-400 leading-relaxed">{feature.desc}</p>
+                <h3 className="text-lg font-semibold text-primary mb-2">{feature.title}</h3>
+                <p className="text-sm text-secondary leading-relaxed">{feature.desc}</p>
               </div>
             ))}
           </div>
         </section>
 
-       
-        <section id="workflow" className="px-4 sm:px-6 py-16 sm:py-24" style={{ background: 'var(--bg-secondary)' }}>
+
+        <section id="workflow" className="px-4 sm:px-6 py-16 sm:py-24 relative overflow-hidden" style={{ background: 'var(--bg-secondary)' }}>
+          <div className="absolute inset-0 opacity-30 pointer-events-none">
+            <Aurora
+              colorStops={["#f06114", "#e6edef", "#d2c9f8"]}
+              blend={0.5}
+              amplitude={1.0}
+              speed={0.5}
+            />
+          </div>
+
           <div className="mx-auto max-w-5xl">
-            <div className="text-center mb-16">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
+
+            <div className="z-10 text-center mb-16">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">
                 How it <span className="text-orange-500">works</span>
               </h2>
-              <p className="mt-4 text-neutral-400">Three simple steps to organized productivity</p>
+              <p className="mt-4 text-secondary">Three simple steps to organized productivity</p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -214,60 +230,25 @@ export default function Home() {
               ].map((item, i) => (
                 <div key={i} className="text-center relative">
                   <div className="text-5xl font-extrabold text-orange-500 mb-4">{item.step}</div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                  <p className="text-sm text-neutral-400 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-xl font-semibold text-primary mb-2">{item.title}</h3>
+                  <p className="text-sm text-secondary leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        
-        <section id="faq" className="px-4 sm:px-6 py-16 sm:py-24">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="mb-12 text-center text-2xl sm:text-3xl md:text-4xl font-bold text-white">
-              Frequently Asked <span className="text-orange-500">Questions</span>
-            </h2>
-            <div className="space-y-6">
-              {[
-                {
-                  q: "What are the login credentials?",
-                  a: "Email: intern@demo.com | Password: intern123. These are hardcoded since there's no backend.",
-                },
-                {
-                  q: "Does my data persist after refresh?",
-                  a: "Yes! All tasks, session data, and activity logs are stored in your browser's localStorage.",
-                },
-                {
-                  q: "Can I drag tasks between columns?",
-                  a: "Absolutely. Drag any task from To Do → Doing → Done and vice versa. All moves are logged.",
-                },
-                {
-                  q: "Is there a backend?",
-                  a: "No. This is a 100% client-side application built with Next.js. Everything runs in your browser.",
-                },
-              ].map((faq, i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl border border-neutral-800 p-6 hover:border-orange-500/30 transition-colors"
-                  style={{ background: 'var(--bg-secondary)' }}
-                >
-                  <h4 className="font-semibold text-lg text-white">{faq.q}</h4>
-                  <p className="mt-2 text-neutral-400 text-sm leading-relaxed">{faq.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-     
+
+
+
         <section className="px-4 sm:px-6 py-16 sm:py-24">
           <div className="mx-auto max-w-4xl text-center">
-            <div className="rounded-3xl border border-neutral-800 p-8 sm:p-12" style={{ background: 'var(--bg-secondary)' }}>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
+            <div className="rounded-3xl border border-neutral-200 dark:border-neutral-800 p-8 sm:p-12" style={{ background: 'var(--bg-secondary)' }}>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-primary mb-4">
                 Ready to get <span className="text-orange-500">organized</span>?
               </h2>
-              <p className="text-neutral-400 mb-8 max-w-lg mx-auto">
+              <p className="text-secondary mb-8 max-w-lg mx-auto">
                 Start managing your tasks right now. No sign-up forms, no credit cards, no backend dependencies.
               </p>
               <button
@@ -282,46 +263,46 @@ export default function Home() {
         </section>
       </main>
 
-    
-      <footer className="border-t border-neutral-800 px-4 sm:px-6 py-12 sm:py-16" style={{ background: 'var(--bg-secondary)' }}>
+
+      <footer className="border-t border-neutral-200 dark:border-neutral-800 px-4 sm:px-6 py-12 sm:py-16" style={{ background: 'var(--bg-secondary)' }}>
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 mb-10">
-          
+
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div>
                   <img src="/logo.png" alt="Logo" className="w-10 h-10" />
                 </div>
-                <span className="text-3xl font-bold text-white">TaskFlow</span>
+                <span className="text-3xl font-bold text-primary">TaskFlow</span>
               </div>
-              <p className="text-sm text-neutral-500 leading-relaxed">
+              <p className="text-sm text-secondary leading-relaxed">
                 A lightweight, client-side task management board. Organize your workflow with drag-and-drop Kanban columns.
               </p>
             </div>
 
-          
+
             <div>
-              <h4 className="text-sm font-semibold text-white mb-4">Quick Links</h4>
+              <h4 className="text-sm font-semibold text-primary mb-4">Quick Links</h4>
               <ul className="space-y-2">
-                <li><a href="#features" className="text-sm text-neutral-500 hover:text-orange-500 transition-colors cursor-pointer">Features</a></li>
-                <li><a href="#workflow" className="text-sm text-neutral-500 hover:text-orange-500 transition-colors cursor-pointer">How it Works</a></li>
-                <li><a href="#faq" className="text-sm text-neutral-500 hover:text-orange-500 transition-colors cursor-pointer">FAQ</a></li>
+                <li><a href="#features" className="text-sm text-secondary hover:text-orange-500 transition-colors cursor-pointer">Features</a></li>
+                <li><a href="#workflow" className="text-sm text-secondary hover:text-orange-500 transition-colors cursor-pointer">How it Works</a></li>
+                <li><a href="#faq" className="text-sm text-secondary hover:text-orange-500 transition-colors cursor-pointer">FAQ</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-sm font-semibold text-white mb-4">Built With</h4>
+              <h4 className="text-sm font-semibold text-primary mb-4">Built With</h4>
               <ul className="space-y-2">
-                <li className="text-sm text-neutral-500">Next.js</li>
-                <li className="text-sm text-neutral-500">React &amp; TypeScript</li>
-                <li className="text-sm text-neutral-500">localStorage</li>
-                <li className="text-sm text-neutral-500">dnd-kit</li>
+                <li className="text-sm text-secondary">Next.js</li>
+                <li className="text-sm text-secondary">React &amp; TypeScript</li>
+                <li className="text-sm text-secondary">localStorage</li>
+                <li className="text-sm text-secondary">dnd-kit</li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-neutral-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-neutral-600">
+          <div className="border-t border-neutral-200 dark:border-neutral-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-neutral-500">
               © 2026 TaskFlow. All data stored locally in your browser.
             </p>
           </div>

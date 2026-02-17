@@ -27,4 +27,5 @@ export type ActivityEvent = {
 export type AuthSession = {
   email: string;
   isAuthenticated: boolean;
+  rememberMe?: boolean;
 };

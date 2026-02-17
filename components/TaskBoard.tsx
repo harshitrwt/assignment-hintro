@@ -64,7 +64,7 @@ export default function TaskBoard() {
 
   return (
     <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-      <div className="grid grid-cols-3 gap-5 h-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 h-auto md:h-full">
         <Column title="To Do" id="todo" tasks={tasks} />
         <Column title="Doing" id="doing" tasks={tasks} />
         <Column title="Done" id="done" tasks={tasks} />

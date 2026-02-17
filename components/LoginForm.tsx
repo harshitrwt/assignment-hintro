@@ -12,6 +12,7 @@ export default function LoginForm() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,10 +24,10 @@ export default function LoginForm() {
 
     await new Promise((r) => setTimeout(r, 500));
 
-    const success = login(email, password);
+    const success = login(email, password, rememberMe);
 
     if (!success) {
-      setError("Invalid email or password. Try intern@demo.com / intern123");
+      setError("Invalid email or password.");
       setLoading(false);
       return;
     }
@@ -78,7 +79,7 @@ export default function LoginForm() {
           <DotGrid
             dotSize={3}
             gap={15}
-            baseColor="bg-neutral-700/20"
+            baseColor="#111111"
             activeColor="#e0421a"
             proximity={120}
             shockRadius={250}
@@ -91,7 +92,7 @@ export default function LoginForm() {
         <div className="relative z-10 w-full max-w-md">
 
           <div className="lg:hidden flex items-center gap-3 mb-10 z-10">
-            
+
             <div className="w-10 h-10 rounded-xl bg-orange-500 flex items-center justify-center">
               <Layout className="w-5 h-5 text-white" />
             </div>
@@ -151,6 +152,21 @@ export default function LoginForm() {
               </div>
             </div>
 
+
+
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                id="rememberMe"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="w-4 h-4 rounded border-neutral-700 bg-neutral-800 text-orange-500 focus:ring-orange-500 focus:ring-offset-0 cursor-pointer"
+              />
+              <label htmlFor="rememberMe" className="text-sm text-neutral-400 cursor-pointer select-none">
+                Remember me
+              </label>
+            </div>
+
             {error && (
               <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
                 {error}
@@ -187,7 +203,7 @@ export default function LoginForm() {
             </button>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }

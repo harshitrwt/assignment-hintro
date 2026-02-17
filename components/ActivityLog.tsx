@@ -2,7 +2,7 @@
 
 import { useApp } from "@/context/AppContext";
 import { ActivityEvent } from "@/types";
-import { History, Trash2, Plus, Pencil, ArrowRightLeft, Trash, AlertTriangle } from "lucide-react";
+import { History, Trash2, Plus, Pencil, ArrowRightLeft, Trash, AlertTriangle, ChevronUp, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 const typeConfig = {
@@ -53,6 +53,7 @@ function formatTimeAgo(dateStr: string) {
 export default function ActivityLog() {
   const { state, dispatch } = useApp();
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleClear = () => {
     dispatch({ type: "CLEAR_ACTIVITY" });
@@ -61,7 +62,7 @@ export default function ActivityLog() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-between p-4 border-b border-zinc-800/50">
+      <div className="flex items-center justify-between p-4 border-b border-zinc-800/50 cursor-pointer md:cursor-default" onClick={() => setIsOpen(!isOpen)}>
         <div className="flex items-center gap-2">
           <History className="w-4 h-4 text-indigo-400" />
           <h3 className="text-sm font-bold text-white">Activity Log</h3>
@@ -71,18 +72,26 @@ export default function ActivityLog() {
             </span>
           )}
         </div>
-        {state.activity.length > 0 && (
-          <button
-            onClick={() => setShowClearConfirm(true)}
-            className="p-1.5 rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/10 transition-all cursor-pointer"
-            title="Clear all activity"
-          >
-            <Trash2 className="w-3.5 h-3.5" />
-          </button>
-        )}
+        <div className="flex items-center gap-2">
+          {/* Mobile Toggle Icon */}
+          <div className="md:hidden text-zinc-500">
+            {isOpen ? <ChevronDown className="w-4 h-4" /> : <ChevronUp className="w-4 h-4" />}
+          </div>
+
+          {state.activity.length > 0 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowClearConfirm(true);
+              }}
+              className="p-1.5 rounded-lg text-zinc-500 hover:text-rose-400 hover:bg-rose-500/10 transition-all cursor-pointer hidden md:block" // Hide clear button on mobile header to avoid clutter or keep it? User said "slider", maybe keep it.
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
       </div>
 
-   
       {showClearConfirm && (
         <div className="mx-4 mt-3 p-3 rounded-xl border border-rose-500/30 bg-rose-500/10 space-y-2">
           <div className="flex items-center gap-2 text-rose-400">
@@ -107,7 +116,7 @@ export default function ActivityLog() {
         </div>
       )}
 
-      <div className="flex-1 overflow-y-auto p-3 space-y-2">
+      <div className={`flex-1 overflow-y-auto p-3 space-y-2 ${isOpen ? 'block' : 'hidden'} md:block`}>
         {state.activity.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-16 text-zinc-600">
             <History className="w-8 h-8 mb-3 opacity-30" />

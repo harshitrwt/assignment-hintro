@@ -24,7 +24,8 @@ type Action =
   | { type: "SET_SEARCH"; payload: string }
   | { type: "SET_FILTER"; payload: string }
   | { type: "SET_SORT"; payload: SortOption }
-  | { type: "CLEAR_ACTIVITY" };
+  | { type: "CLEAR_ACTIVITY" }
+  | { type: "RESET_BOARD" };
 
 const initialState: State = {
   user: null,
@@ -150,6 +151,12 @@ function reducer(state: State, action: Action): State {
     case "CLEAR_ACTIVITY":
       return { ...state, activity: [] };
 
+    case "RESET_BOARD":
+      return {
+        ...initialState,
+        user: state.user, // Keep user logged in
+      };
+
     default:
       return state;
   }
@@ -158,13 +165,40 @@ function reducer(state: State, action: Action): State {
 const AppContext = createContext<any>(null);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(
-    reducer,
-    storage.get("taskboard", initialState)
-  );
+  // Initialize state from storage
+  // 1. Try to get full state from localStorage
+  const localState = storage.get<State | null>("taskboard", null);
+  // 2. Try to get user session from sessionStorage
+  const sessionUser = storage.getSession<AuthSession | null>("taskboard_user", null);
+
+  // Merge: Use local state if exists, otherwise default.
+  // Then if user is missing in local (because it was session-only), try sessionUser.
+  const initializedState = localState ? { ...initialState, ...localState } : { ...initialState };
+
+  if (!initializedState.user && sessionUser) {
+    initializedState.user = sessionUser;
+  }
+
+  const [state, dispatch] = useReducer(reducer, initializedState);
 
   useEffect(() => {
-    storage.set("taskboard", state);
+    if (state.user) {
+      if (state.user.rememberMe) {
+        // Save full state (including user) to localStorage
+        storage.set("taskboard", state);
+        storage.removeSession("taskboard_user");
+      } else {
+        // Session only: Save user to session
+        storage.setSession("taskboard_user", state.user);
+        // Save rest of state to local, but without user
+        const stateNoUser = { ...state, user: null };
+        storage.set("taskboard", stateNoUser);
+      }
+    } else {
+      // Logged out: Clear session, save state (user is null)
+      storage.set("taskboard", state);
+      storage.removeSession("taskboard_user");
+    }
   }, [state]);
 
   return (

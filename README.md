@@ -62,7 +62,7 @@ Key files to inspect:
 
 ---
 
-## ▶️ Run locally
+## Run locally
 
 1. Install dependencies
 
@@ -92,14 +92,7 @@ Key files to inspect:
 
 ---
 
-## 🔎 Example data & demo credentials
-
-- Demo user: `intern@demo.com` / `intern123`
-- Data persistence happens in `localStorage` under the `taskboard` key — you can inspect or reset it from the browser devtools.
-
----
-
-## 📁 Detailed folder map
+## Detailed folder map
 
 - `app/` — route pages (root `page.tsx`, `board/page.tsx`, `login/page.tsx`)
 - `components/TaskBoard.tsx` — board layout + DnD context
@@ -113,7 +106,7 @@ Key files to inspect:
 
 ---
 
-## 🖼 Screenshots (#screenshits)
+## Screenshots
 
 > Dummy screenshot placeholders — replace these with real images in `public/screenshots/`
 
@@ -131,7 +124,7 @@ Key files to inspect:
 
 ---
 
-## 💡 Tips & extension ideas
+## Tips & extension ideas
 
 - Add backend API + database for multi-user persistence
 - Add real authentication (OAuth / JWT)
@@ -147,6 +140,3 @@ Key files to inspect:
 
 ---
 
-## License
-
-MIT — feel free to reuse and extend.
